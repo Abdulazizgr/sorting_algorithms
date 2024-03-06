@@ -7,7 +7,9 @@
  */
 void swap(int *a, int *b)
 {
-    int temp = *a;
+    int tem;
+
+    temp = *a;
     *a = *b;
     *b = temp;
 }
@@ -49,9 +51,11 @@ int lomuto_partition(int *array, int l, int h, size_t size)
  */
 void qck_sort(int *array, int l, int h, size_t size)
 {
+    int pi = 0;
+
     if (l < h)
     {
-        int pi = lomuto_partition(array, l, h, size);
+        pi = lomuto_partition(array, l, h, size);
 
         qck_sort(array, l, pi - 1, size);
         qck_sort(array, pi + 1, h, size);
