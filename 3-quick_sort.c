@@ -15,32 +15,38 @@ void swap(int *a, int *b)
 }
 
 /**
- * lomuto_partition - Lomuto partition scheme
+ * lomuto_partition - Lomuto partition sorting scheme implementation
  * @array: Array to be sorted
- * @l: Starting index
- * @h: Ending index
+ * @l: Index of the first element
+ * @h: Index of the last element
  * @size: Size of the array
- * Return: Partition index
+ * Return: Position of the last element sorted
  */
-int lomuto_partition(int *array, int l, int h, size_t size)
+int lomuto_partition(int *array, int l, int h, int size)
 {
-    int piv = array[h];
-    int i = l - 1;
-    int j;
+    int pivot = array[h];
+    int curr = l, i;
 
-    for (j = l; j <= h - 1; j++)
+    for (i = l; i <= h - 1; i++)
     {
-        if (array[j] < piv)
+        if (array[i] < pivot)
         {
-            i++;
-            swap(&array[i], &array[j]);
-            print_array(array, size);
+            if (array[curr] != array[i])
+            {
+                swap(&array[curr], &array[i]);
+                print_array(array, size);
+            }
+            curr++;
         }
     }
-    swap(&array[i + 1], &array[h]);
-    print_array(array, size);
-    return (i + 1);
+    if (array[curr] != array[h])
+    {
+        swap(&array[curr], &array[h]);
+        print_array(array, size);
+    }
+    return (curr);
 }
+
 
 /**
  * qck_sort - Quick sort function
